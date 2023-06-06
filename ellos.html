@@ -1,0 +1,315 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Ελλος Map</title>
+      <style>
+         .highlightC {
+         background-color: #a8cdd9;
+         transition: background-color 0.3s ease-in-out;
+         }
+         .highlightP {
+         background-color: #99ceb3;
+         transition: background-color 0.3s ease-in-out;
+         }
+         body {
+         background-color: #caae98; /* pastel blue */
+         color: white;
+         }
+         .map-container {
+         position: relative;
+         display: inline-block;
+         }
+         .map-image {
+         width: 100%;
+         height: auto;
+         }
+         .city, .place {
+         position: absolute;
+         display: inline-block;
+         z-index: 1;
+         }
+         .city::after {
+         content: attr(data-name);
+         position: absolute;
+         top: -3em;
+         left: 50%;
+         transform: translateX(-50%);
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         font-size: 14px;
+         font-weight: bold;
+         color: white;
+         display: none;
+         padding: 0.5em;
+         background-color: #1985a6; /* changed background-color to dark pastel blue */
+         border-radius: 5px;
+         box-shadow: 0 0 5px rgba(0,0,0,0.2);
+         white-space: nowrap;
+         opacity: 0;
+         z-index: 2;
+         pointer-events: none;
+         transition: opacity 0.3s ease-in-out;
+         }
+         .place::after {
+         content: attr(data-name);
+         position: absolute;
+         top: -3em;
+         left: 50%;
+         transform: translateX(-50%);
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         font-size: 14px;
+         font-weight: bold;
+         color: white;
+         display: none;
+         padding: 0.5em;
+         background-color: #5da22e; /* changed background-color to dark pastel blue */
+         border-radius: 5px;
+         box-shadow: 0 0 5px rgba(0,0,0,0.2);
+         white-space: nowrap;
+         opacity: 0;
+         z-index: 2;
+         pointer-events: none;
+         transition: opacity 0.3s ease-in-out;
+         }
+         .city:hover::after, .place:hover::after {
+         display: block;
+         opacity: 1;
+         }
+         .blue-circle {
+         width: 30px;
+         height: 30px;
+         background-color: #7fa5e8;
+         border-radius: 50%;
+         cursor: pointer;
+         transition: transform 0.3s ease-in-out;
+         z-index: 0;
+         background-color: transparent; /* changed background-color to dark pastel blue */
+         }
+         .blue-circle:hover {
+         transform: scale(1.2);
+         }
+         .green-square {
+         width: 20px;
+         height: 20px;
+         background-color: #b5e5b5;
+         cursor: pointer;
+         transition: transform 0.3s ease-in-out;
+         z-index: 0;
+         background-color: transparent; /* changed background-color to dark pastel blue */
+         }
+         .green-square:hover {
+         transform: scale(1.2);
+         }
+         .city:hover::after, .place:hover::after {
+         display: block;
+         opacity: 1;
+         z-index: 3;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Ελλος Map</h1>
+      <div class="map-container">
+         <img src="https://media.discordapp.net/attachments/1100454161616752661/1101129362000068618/map.png" alt="Ελλος Map" class="map-image">
+         <!-- Blue Circles (Cities) -->
+         <!-- Change the 'left' and 'top' values to move the city circles -->
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city1" data-name="Athenia City" style="left: 42.46%; top: 35.29%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city2" data-name="Patralis City" style="left: 34.95%; top: 37.28%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city3" data-name="Tripolos City" style="left: 33.69%; top: 46.72%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city4" data-name="Lamiakos City" style="left: 26.15%; top: 31.31%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city5" data-name="Agrinos City" style="left: 14.27%; top: 29.72%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city6" data-name="Iyona City" style="left: 11.75%; top: 21.67%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city7" data-name="Larissea City" style="left: 28.20%; top: 21.60%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city8" data-name="Thesa City" style="left: 30.58%; top: 13.40%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city9" data-name="Mytilinae City" style="left: 64.71%; top: 22.32%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city10" data-name="Barion City" style="left: 72.80%; top: 14.22%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city11" data-name="Aydin City" style="left: 75.05%; top: 26.10%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city12" data-name="Mulaia City" style="left: 86.98%; top: 34.83%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city13" data-name="Rhodona City" style="left: 89.42%; top: 44.77%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city14" data-name="Herakleion City" style="left: 62.39%; top: 58.09%;"></div>
+         <div class="city blue-circle ui-draggable ui-draggable-handle" id="city15" data-name="Komotinis City" style="left: 53.19%; top: 6.42%;"></div>
+         <!-- Green Squares (Places) -->
+         <!-- Change the 'left' and 'top' values to move the place squares -->
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place1" data-name="Poseidon’s Reef" style="left: 60.82%; top: 46.55%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place2" data-name="Hades’ Abyss" style="left: 59.21%; top: 4.52%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place3" data-name="Hephaestus’ Foundry" style="left: 23.52%; top: 15.50%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place4" data-name="Athena's Arena" style="left: 54.40%; top: 17.09%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place5" data-name="Apollo's Observatory" style="left: 47.35%; top: 38.54%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place6" data-name="Zeus’ Thunderdome" style="left: 16.64%; top: 25.41%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place7" data-name="Demeter's Meadow" style="left: 83.04%; top: 28.82%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place8" data-name="Artemis’ Hunt" style="left: 48.86%; top: 6.51%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place9" data-name="Dionysus’ Vineyard" style="left: 38.62%; top: 9.87%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place10" data-name="Atlas’ Summit" style="left: 20.20%; top: 16.47%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place11" data-name="Medusa's Labyrinth" style="left: 37.36%; top: 30.60%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place12" data-name="Cyclops’ Forge" style="left: 64.05%; top: 37.06%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place13" data-name="Icarus’ Sky" style="left: 32.12%; top: 41.86%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place14" data-name="Narcissus’ Reflection" style="left: 46.44%; top: 32.42%;"></div>
+         <div class="place green-square ui-draggable ui-draggable-handle" id="place15" data-name="Echo's Echo Chamber" style="left: 92.33%; top: 35.20%;"></div>
+         <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <div>
+               <!-- Blue Circles (Cities) Text Boxes -->
+               <div>
+                  <label for="city1Position"></label>
+                  <input type="text" id="city1Position" class="city1-desc" readonly="" value="Athenia City">
+               </div>
+               <div>
+                  <label for="city2Position"</label>
+                  <input type="text" id="city2Position" class="city2-desc" readonly="" value="Patralis City">
+               </div>
+               <div>
+                  <label for="city3Position"></label>
+                  <input type="text" id="city3Position" class="city3-desc" readonly="" value="Tripolos City">
+               </div>
+               <div>
+                  <label for="city4Position"></label>
+                  <input type="text" id="city4Position" class="city4-desc" readonly="" value="Lamiakos City">
+               </div>
+               <div>
+                  <label for="city5Position"></label>
+                  <input type="text" id="city5Position" class="city5-desc" readonly="" value="Agrinos City">
+               </div>
+               <div>
+                  <label for="city6Position"></label>
+                  <input type="text" id="city6Position" class="city6-desc" readonly="" value="Iyona City">
+               </div>
+               <div>
+                  <label for="city7Position"></label>
+                  <input type="text" id="city7Position" class="city7-desc" readonly="" value="Larissea City">
+               </div>
+               <div>
+                  <label for="city8Position"></label>
+                  <input type="text" id="city8Position" class="city8-desc" readonly="" value="Thesa City">
+               </div>
+               <div>
+                  <label for="city9Position"></label>
+                  <input type="text" id="city9Position" class="city9-desc" readonly="" value="Mytilinae City">
+               </div>
+               <div>
+                  <label for="city10Position"></label>
+                  <input type="text" id="city10Position" class="city10-desc" readonly="" value="Barion City">
+               </div>
+               <div>
+                  <label for="city11Position"></label>
+                  <input type="text" id="city11Position" class="city11-desc" readonly="" value="Aydin City">
+               </div>
+               <div>
+                  <label for="city12Position"></label>
+                  <input type="text" id="city12Position" class="city12-desc" readonly="" value="Mulaia City">
+               </div>
+               <div>
+                  <label for="city13Position"></label>
+                  <input type="text" id="city13Position" class="city13-desc" readonly="" value="Rhodona City">
+               </div>
+               <div>
+                  <label for="city14Position"></label>
+                  <input type="text" id="city14Position" class="city14-desc" readonly="" value="Herakleion City">
+               </div>
+               <div>
+                  <label for="city15Position"></label>
+                  <input type="text" id="city15Position" class="city15-desc" readonly="" value="Komotinis City">
+               </div>
+            </div>
+            <div>
+               <!-- Green Squares (Places) Text Boxes -->
+               <div>
+                  <label for="place1Position"></label>
+                  <input type="text" id="place1Position" class="place1-desc" readonly="" value="Poseidon’s Reef">
+               </div>
+               <div>
+                  <label for="place2Position"></label>
+                  <input type="text" id="place2Position" class="place2-desc" readonly="" value="Hades’ Abyss">
+               </div>
+               <div>
+                  <label for="place3Position"></label>
+                  <input type="text" id="place3Position" class="place3-desc" readonly="" value="Hephaestus’ Foundry">
+               </div>
+               <div>
+                  <label for="place4Position"></label>
+                  <input type="text" id="place4Position" class="place4-desc" readonly="" value="Athena's Arena">
+               </div>
+               <div>
+                  <label for="place5Position"></label>
+                  <input type="text" id="place5Position" class="place5-desc" readonly="" value="Apollo's Observatory">
+               </div>
+               <div>
+                  <label for="place6Position"></label>
+                  <input type="text" id="place6Position" class="place6-desc" readonly="" value="Zeus’ Thunderdome">
+               </div>
+               <div>
+                  <label for="place7Position"></label>
+                  <input type="text" id="place7Position"class="place7-desc" readonly="" value="Demeter's Meadow">
+               </div>
+               <div>
+                  <label for="place8Position"></label>
+                  <input type="text" id="place8Position" class="place8-desc" readonly="" value="Artemis’ Hunt">
+               </div>
+               <div>
+                  <label for="place9Position"></label>
+                  <input type="text" id="place9Position" class="place9-desc" readonly="" value="Dionysus’ Vineyard">
+               </div>
+               <div>
+                  <label for="place10Position"></label>
+                  <input type="text" id="place10Position" class="place10-desc" readonly="" value="Atlas’ Summit">
+               </div>
+               <div>
+                  <label for="place11Position"></label>
+                  <input type="text" id="place11Position" class="place11-desc" readonly="" value="Medusa's Labyrinth">
+               </div>
+               <div>
+                  <label for="place12Position"></label>
+                  <input type="text" id="place12Position" class="place12-desc" readonly="" value="Cyclops’ Forge">
+               </div>
+               <div>
+                  <label for="place13Position"></label>
+                  <input type="text" id="place13Position" class="place13-desc"readonly="" value="Icarus’ Sky">
+               </div>
+               <div>
+                  <label for="place14Position"></label>
+                  <input type="text" id="place14Position" class="place14-desc" readonly="" value="Narcissus’ Reflection">
+               </div>
+               <div>
+                  <label for="place15Position"></label>
+                  <input type="text" id="place15Position" class="place15-desc" readonly="" value="Echo's Echo Chamber">
+               </div>
+            </div>
+         </div>
+         <script>
+            const cityIds = [
+                "city1", "city2", "city3", "city4", "city5", "city6", "city7", "city8",
+                "city9", "city10", "city11", "city12", "city13", "city14", "city15"
+            ];
+            
+            const placeIds = [
+                "place1", "place2", "place3", "place4", "place5", "place6", "place7", "place8",
+                "place9", "place10", "place11", "place12", "place13", "place14", "place15"
+            ];
+            
+            cityIds.forEach((id) => {
+                const cityElement = document.getElementById(id);
+                const descriptionElement = document.querySelector(`.${id}-desc`);
+            
+                cityElement.addEventListener('mouseover', () => {
+                    descriptionElement.classList.add('highlightC');
+                });
+            
+                cityElement.addEventListener('mouseout', () => {
+                    descriptionElement.classList.remove('highlightC');
+                });
+            });
+            
+            placeIds.forEach((id) => {
+                const placeElement = document.getElementById(id);
+                const descriptionElement = document.querySelector(`.${id}-desc`);
+            
+                placeElement.addEventListener('mouseover', () => {
+                    descriptionElement.classList.add('highlightP');
+                });
+            
+                placeElement.addEventListener('mouseout', () => {
+                    descriptionElement.classList.remove('highlightP');
+                });
+            });
+         </script>
+      </div>
+   </body>
+</html>
